@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz Reklamacji</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}" />
+</head>
+<body>
+<!--<h1>Formularz Reklamacji</h1>-->
+
+<div id="complaintForm">
+    <h2>Produkt do reklamacji: <span th:text="${productName}"></span></h2>
+
+    <form action="/submit-complaint" th:action="@{/complaint/index}" method="post">
+        <input type="hidden" th:value="${productName}" name="productName">
+
+        <p>Typ reklamacji:
+        <select id="complaintType" name="complaintType" required>
+            <option value="jakość">Jakość produktu</option>
+            <option value="dostawa">Problem z dostawą</option>
+            <option value="inne">Inne</option>
+        </select>
+        </p>
+        <p>Opis reklamacji:</p>
+
+        <p>
+        <textarea id="complaintDescription" name="complaintDescription" rows="4" required></textarea>
+        </p>
+
+        <button type="submit">Złóż reklamację</button>
+    </form>
+    <button class="btn btn-primary" onclick="window.location.href='/complaint/products'">Powrót</button>
+</div>
+</body>
+</html>

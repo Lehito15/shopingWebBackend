@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
+
+<head>
+    <title layout:fragment="title">Product List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}" />
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1>Twoje zamówienia</h1>
+
+    <div class="content">
+<!--        <button class="btn btn-success" onclick="window.location.href='/Basket/basket'">Przejdz do koszyka</button>-->
+
+
+        <table class="display table table-bordered" style="width:800px">
+            <thead class="text-center">
+            <tr>
+                <th class="text-left">Id zamówienia</th>
+                <th class="text-left">Kwota</th>
+                <th class="text-left">Data</th>
+                <th class="text-left">Ilość produktów</th>
+
+                <th class="text-center" colspan="1">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orderList}">
+
+                <td class="text-left" th:text="${order.getId()}"></td>
+                <td class="text-left" th:text="${order.getAmount()}"></td>
+                <td class="text-center" th:text="${order.getOrderDate()}"></td>
+                <td class="text-center" th:text="${order.getProducts().size()}"></td>
+
+                <td><a class="btn btn-primary" th:href="@{/complaint/products/{id}(id=${order.getId()})}">Reklamój</a></td>
+
+
+            </tr>
+            </tbody>
+        </table>
+<!--        <button class="btn btn-primary" onclick="window.location.href='/category/'">Przejdź do kategorii</button>-->
+
+        <!-- Przycisk do dodawania nowej kategorii -->
+
+
+        <!-- Tabela dla kategorii -->
+
+    </div>
+</div>
+</body>
+
+</html>

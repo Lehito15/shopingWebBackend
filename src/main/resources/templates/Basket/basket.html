@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
+
+<head>
+    <title layout:fragment="title">Product List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}" />
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1>Koszyk</h1>
+
+    <div class="content">
+        <button class="btn btn-success" onclick="window.location.href='/Basket/index'">Przejdz do Produktów</button>
+
+
+        <table class="display table table-bordered" style="width:800px">
+            <thead class="text-center">
+            <tr>
+                <th class="text-left">Nazwa</th>
+                <th class="text-left">Liczba</th>
+                <th class="text-center" colspan="1">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="basket : ${basketList}">
+
+                <td class="text-left" th:text="${basket.getId().getProduct().getName()}"></td>
+                <td class="text-left" th:text="${basket.getNumber()}"></td>
+                <td><a class="btn" th:href="@{/Basket/delete/{id}(id=${basket.getId().getProduct().getId()  })}">Usuń</a></td>
+
+
+
+
+            </tr>
+            </tbody>
+        </table>
+<!--        <button class="btn btn-primary" onclick="window.location.href='/category/'">Przejdź do kategorii</button>-->
+
+        <!-- Przycisk do dodawania nowej kategorii -->
+
+
+        <!-- Tabela dla kategorii -->
+
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
+
+<head>
+    <title layout:fragment="title">Product List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}" />
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1>Product List</h1>
+    <select id="sortOrder">
+        <option value="asc">Rosnąco</option>
+        <option value="desc">Malejąco</option>
+    </select>
+
+    <button onclick='sortTable1(document.getElementById("table"), 4, getSortOrder())'>Sortuj</button>
+
+    <div class="content" id="list">
+        <button class="btn btn-success" onclick="window.location.href='/Basket/basket'">Przejdz do koszyka</button>
+
+        <table id = "table" class="table-sortable" style="width:800px">
+            <thead class="text-center">
+            <tr>
+                <th class="text-left">Nazwa</th>
+                <th class="text-left">Kategoria</th>
+                <th class="text-left">Ilosc</th>
+                <th class="text-left">Jednostka</th>
+                <th  class="text-left">Cena</th>
+                <th class="text-center" colspan="1">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="produkt : ${productList}" id="productRow">
+                <td class="text-left" th:text="${produkt.getName()}"></td>
+                <td class="text-left" th:text="${produkt.getCategory().getName()}"></td>
+                <td class="text-center" th:text="${produkt.getNumber()}"></td>
+                <td class="text-center" th:text="${produkt.getUnit().getName()}"></td>
+                <td class="text-center" th:text="${produkt.getPrice()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/Basket/add/{id}(id=${produkt.getId()})}">Dodaj</a></td>
+            </tr>
+            </tbody>
+        </table>
+<!--        <button class="btn btn-primary" onclick="window.location.href='/category/'">Przejdź do kategorii</button>-->
+    </div>
+</div>
+<script th:src = "@{/sort.js}"></script>
+
+</body>
+
+</html>
